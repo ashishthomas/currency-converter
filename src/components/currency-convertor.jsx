@@ -13,12 +13,10 @@ const CurrencyConverter = () => {
     JSON.parse(localStorage.getItem("favorites")) || ["INR", "EUR"]
   );
 
-  // Currencies -> https://api.frankfurter.app/currencies
   const fetchCurrencies = async () => {
     try {
       const res = await fetch("https://api.frankfurter.app/currencies");
       const data = await res.json();
-
       setCurrencies(Object.keys(data));
     } catch (error) {
       console.error("Error Fetching", error);
@@ -29,9 +27,6 @@ const CurrencyConverter = () => {
     fetchCurrencies();
   }, []);
 
-  console.log(currencies);
-
-  // Conversion -> https://api.frankfurter.app/latest?amount=1&from=USD&to=INR
   const convertCurrency = async () => {
     if (!amount) return;
     setConverting(true);
@@ -40,7 +35,6 @@ const CurrencyConverter = () => {
         `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`
       );
       const data = await res.json();
-
       setConvertedAmount(data.rates[toCurrency] + " " + toCurrency);
     } catch (error) {
       console.error("Error Fetching", error);
@@ -68,58 +62,56 @@ const CurrencyConverter = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto my-10 p-5 bg-white rounded-lg shadow-md">
-      <h2 className="mb-5 text-2xl font-semibold text-gray-700">
-        Currency Converter
+    <div className="max-w-xl mx-auto my-12 p-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+      <h2 className="mb-6 text-3xl font-bold text-gray-800 text-center tracking-wide">
+        💱 Currency Converter
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-end">
         <CurrencyDropdown
           favorites={favorites}
           currencies={currencies}
-          title="From:"
+          title="From Currency"
           currency={fromCurrency}
           setCurrency={setFromCurrency}
           handleFavorite={handleFavorite}
         />
-        {/* swap currency button */}
-        <div className="flex justify-center -mb-5 sm:mb-0">
+
+        <div className="flex justify-center -mb-4 sm:mb-0">
           <button
             onClick={swapCurrencies}
-            className="p-2 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+            className="p-3 bg-gray-100 border border-gray-300 rounded-full shadow-sm hover:bg-gray-200 hover:shadow-md transition-all"
           >
-            <HiArrowsRightLeft className="text-xl text-gray-700" />
+            <HiArrowsRightLeft className="text-2xl text-gray-700" />
           </button>
         </div>
+
         <CurrencyDropdown
           favorites={favorites}
           currencies={currencies}
           currency={toCurrency}
           setCurrency={setToCurrency}
-          title="To:"
+          title="To Currency"
           handleFavorite={handleFavorite}
         />
       </div>
 
-      <div className="mt-4">
-        <label
-          htmlFor="amount"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Amount:
+      <div className="mt-6">
+        <label htmlFor="amount" className="text-sm font-semibold text-gray-700">
+          Amount
         </label>
         <input
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           type="number"
-          className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 mt-1"
+          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
         />
       </div>
 
-      <div className="flex justify-end mt-6">
+      <div className="flex justify-end mt-8">
         <button
           onClick={convertCurrency}
-          className={`px-5 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+          className={`px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 transition
           ${converting ? "animate-pulse" : ""}`}
         >
           Convert
@@ -127,8 +119,8 @@ const CurrencyConverter = () => {
       </div>
 
       {convertedAmount && (
-        <div className="mt-4 text-lg font-medium text-right text-green-600">
-          Converted Amount: {convertedAmount}
+        <div className="mt-6 text-2xl font-semibold text-right text-green-600">
+          ➤ {convertedAmount}
         </div>
       )}
     </div>

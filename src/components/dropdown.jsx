@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import {HiOutlineStar, HiStar} from "react-icons/hi2";
+import { HiOutlineStar, HiStar } from "react-icons/hi2";
 
 const CurrencyDropdown = ({
   currencies,
