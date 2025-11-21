@@ -1,7 +1,7 @@
-# Trade Excelsior
+# Currency Converter App
 
 <div align="center">
-    <img src="./public/" alt="" >
+    <img src="./public/currency-convertoer screensshot .png" alt="currency-converter" >
 </div>
 
 ## 📋 Table of Contents
@@ -9,19 +9,21 @@
 1. [Introduction](#-introduction)
 2. [Tech Stack](#-tech-stack)
 3. [Features](#-features)
-4. [Quick Start](#-quick-start)
-5. [Contributiion Guidlenes](#-Contributiion-Guidlenes)
+4. [API Used](#-api-used)
+5. [Quick Start](#-quick-start)
+6. [Contributiion Guidlenes](#-Contributiion-Guidlenes)
 
 ---
 
 ## 🚀 Introduction
 
-Trade Excelsior is a modern, user-friendly web application for managing books, onboarding checklists, watchlists, references, success stories, and user support. Built with Vite and React, it provides a fast, responsive, and intuitive experience for both admin and user roles. The platform features role-based routing, modular components, and a clean UI for efficient workflow management.
+A simple and elegant Currency Converter built using **React**, featuring:
 
-### What is this repository for?
-
-- Trade Excelsior Admin/User Portal
-- Version: 1.0
+- Live exchange rates via Frankfurter API
+- Swap currencies feature
+- Favorite currencies with localStorage persistence
+- Clean and professional UI using TailwindCSS
+- Modular components
 
 ---
 
@@ -29,28 +31,33 @@ Trade Excelsior is a modern, user-friendly web application for managing books, o
 
 - **Vite:** Fast build tool and development server for modern web projects.
 - **React:** Component-based JavaScript library for building user interfaces.
-- **React Router v6+:** Declarative routing for React applications, supporting nested routes and dynamic navigation.
-- **Formik:** Form management library for React.
-- **Yup:** Schema validation library for Formik.
-- **React Table Library:** React component library for building complex tables.
-- **Bootstrap:** Popular CSS framework for responsive and mobile-first design.
-- **Material-UI (MUI):** React UI framework for fast, beautiful, and accessible components.
+- **TailwindCSS:** Utility-first CSS framework for rapid UI development.
+- **frankfurter:** API for live currency exchange rates.
+- **React-Icons:** Collection of popular icons for React applications.
 - **ESLint:** Code quality tool to enforce best practices and maintain code consistency.
 
 ---
 
 ## ⚡️ Features
 
-- **Role-Based Routing:** Separate admin and user dashboards with dynamic route switching.
-- **Book Management:** Add, edit, and delete books with modal forms.
-- **Onboarding Checklist:** Manage onboarding tasks and checklists for users.
-- **Core Watchlist:** Track and edit core watchlist items and trends.
-- **References:** Add, edit, and delete reference materials.
-- **Success Stories:** Share and manage user success stories.
-- **Support System:** User support cards and details for help and feedback.
-- **Profile Management:** Update profile and change password features.
-- **Responsive Design:** Fully responsive layout for all devices.
-- **Modern UI:** Clean, attractive interface using Bootstrap and MUI.
+- Convert any currency to another in real time
+- Select currencies from a well-designed dropdown
+- Mark currencies as favorites ⭐
+- Persistent favorites using browser localStorage
+- Smooth UI interactions and responsive layout
+
+---
+
+## 🌐 API Used
+
+Frankfurter Exchange Rate API  
+Endpoint: https://api.frankfurter.app
+
+Example:
+
+```
+https://api.frankfurter.app/latest?amount=1&from=USD&to=INR
+```
 
 ---
 
@@ -80,8 +87,13 @@ npm run dev
 - Submit pull requests for improvements
 - Follow code style and best practices
 
-### Who do I talk to?
+---
 
-- Trade Excelsior Team
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+```
 
 ---
+
