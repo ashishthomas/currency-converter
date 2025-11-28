@@ -45,12 +45,9 @@ const CurrencyConverter = () => {
 
   const handleFavorite = (currency) => {
     let updatedFavorites = [...favorites];
-
-    if (favorites.includes(currency)) {
-      updatedFavorites = updatedFavorites.filter((fav) => fav !== currency);
-    } else {
-      updatedFavorites.push(currency);
-    }
+    updatedFavorites = favorites.includes(currency)
+      ? favorites.filter((fav) => fav !== currency)
+      : [...favorites, currency];
 
     setFavorites(updatedFavorites);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -62,64 +59,103 @@ const CurrencyConverter = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto my-12 p-8 bg-white rounded-2xl shadow-xl border border-gray-100">
-      <h2 className="mb-6 text-3xl font-bold text-gray-800 text-center tracking-wide">
-        💱 Currency Converter
+    <div
+      className="
+      min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-black
+    "
+    >
+      {/* Neon glow ring */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-indigo-500/10 to-purple-500/10 blur-2xl -z-10"></div>
+
+      <h2 className="mb-8 text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-cyan-300 tracking-wide drop-shadow-lg">
+        ✨ Currency Converter
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-end">
+      {/* Form section */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-end">
         <CurrencyDropdown
           favorites={favorites}
           currencies={currencies}
-          title="From Currency"
+          title="From"
           currency={fromCurrency}
           setCurrency={setFromCurrency}
           handleFavorite={handleFavorite}
         />
 
-        <div className="flex justify-center -mb-4 sm:mb-0">
+        <div className="flex justify-center -mb-6 sm:mb-0">
           <button
             onClick={swapCurrencies}
-            className="p-3 bg-gray-100 border border-gray-300 rounded-full shadow-sm hover:bg-gray-200 hover:shadow-md transition-all"
+            className="
+              p-4 rounded-full 
+              bg-slate-700/40 border border-slate-600 
+              shadow-lg backdrop-blur 
+              hover:scale-110 hover:shadow-[0_0_20px_#5ac4ff90]
+              transition-all duration-300
+            "
           >
-            <HiArrowsRightLeft className="text-2xl text-gray-700" />
+            <HiArrowsRightLeft className="text-3xl text-cyan-300" />
           </button>
         </div>
 
         <CurrencyDropdown
           favorites={favorites}
           currencies={currencies}
+          title="To"
           currency={toCurrency}
           setCurrency={setToCurrency}
-          title="To Currency"
           handleFavorite={handleFavorite}
         />
       </div>
 
-      <div className="mt-6">
-        <label htmlFor="amount" className="text-sm font-semibold text-gray-700">
+      {/* Amount input */}
+      <div className="mt-8">
+        <label
+          htmlFor="amount"
+          className="text-sm font-semibold text-slate-300"
+        >
           Amount
         </label>
+
         <input
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           type="number"
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          id="amount"
+          className="
+            w-full p-4 mt-2 
+            rounded-xl bg-slate-800 text-slate-100 text-xl 
+            border border-slate-600
+            shadow-inner
+            focus:ring-2 focus:ring-cyan-400 focus:border-cyan-300 
+            transition
+          "
         />
       </div>
 
-      <div className="flex justify-end mt-8">
+      <div className="flex justify-end mt-10">
         <button
           onClick={convertCurrency}
-          className={`px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 transition
-          ${converting ? "animate-pulse" : ""}`}
+          className="
+            px-8 py-3 rounded-xl 
+            bg-gradient-to-r from-cyan-500 to-indigo-500 
+            text-white font-bold text-lg 
+            shadow-lg shadow-indigo-700/40 
+            hover:scale-105 hover:shadow-indigo-500/60
+            transition-all duration-300
+          "
         >
-          Convert
+          {converting ? "Processing..." : "Convert"}
         </button>
       </div>
 
       {convertedAmount && (
-        <div className="mt-6 text-2xl font-semibold text-right text-green-600">
+        <div
+          className="
+          mt-8 text-3xl font-bold text-right 
+          bg-gradient-to-r from-green-400 to-emerald-300 
+          text-transparent bg-clip-text drop-shadow-lg
+        "
+        >
           ➤ {convertedAmount}
         </div>
       )}
